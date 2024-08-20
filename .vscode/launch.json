@@ -16,6 +16,19 @@
                 "models",
                 "../../../../fullstack-lang/gongxsd/test/reqif/toto"
             ]
+        },
+        {
+            "name": "Compile complex.xsd",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cli/gocomply_xsd2go",
+            "args": [
+                "convert",
+                "../../tests/xsd-examples/valid/complex.xsd",
+                "models",
+                "../../tests/xsd-examples/valid/toto"
+            ]
         }
     ]
 }
