@@ -38,13 +38,23 @@ func (ws *Workspace) loadXsd(xsdPath string, cache bool) (*Schema, error) {
 	}
 	fmt.Println("\tParsing:", xsdPath)
 
+	var schema *Schema
+	var err error
+
 	xsdPathClean := filepath.Clean(xsdPath)
-	f, err := os.Open(xsdPathClean)
-	if err != nil {
-		return nil, err
+	f, err3 := os.Open(xsdPathClean)
+	if err3 != nil {
+
+		f, err2 := getRemoteFile(xsdPath)
+		if err2 != nil {
+			return nil, err
+		}
+		schema, err = parseSchema(f)
+
+	} else {
+		schema, err = parseSchema(f)
 	}
 
-	schema, err := parseSchema(f)
 	if err != nil {
 		err2 := f.Close()
 		if err2 != nil {
